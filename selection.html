@@ -11,6 +11,15 @@
         function goToMain() {
             window.location.href = 'main.html';  // Redirect to the main page
         }
+
+        function popul() {
+            window.location.href = "population.html";  // 인구 예측 페이지로 이동
+        }
+
+        function popul_pyram() {
+        window.location.href = "population_pyramid.html";  // 인구 피라미드 페이지로 이동
+        }
+
     </script>
 </head>
 <body>
@@ -27,10 +36,11 @@
     </header>
     <main>
         <div class="header-content">
-            <h2>지역소멸 예측</h2>
-            <h2>이미지 넣기</h2>
-            <!-- Button with onclick event that calls the goToMain() function -->
-            <button onclick="goToMain()">메인으로</button>
+            <h2>인구 예측 페이지</h2>
+            <button onclick="popul()">인구 예측 페이지</button>
+            <h2></h2>
+            <h2>인구 피라미드 페이지</h2>
+            <button onclick="popul_pyram()">인구 피라미드 페이지</button>
         </div>
     </main>
 </body>

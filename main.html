@@ -7,58 +7,65 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css">
   <script>
-    document.getElementById('searchForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // 기본 폼 제출을 막습니다.
-    
-      // 입력 필드의 값을 가져옵니다.
-      const searchQuery = document.querySelector('input[type="text"]').value.trim().toLowerCase();
-    
-      // 입력값이 있을 때 처리
-      if (searchQuery !== "") {
-        let targetPage = "";
-    
-        // "인구"라는 검색어가 포함된 경우
-        if (searchQuery.includes("인구")) {
-          // 두 페이지 선택을 위한 UI 표시
-          document.getElementById('selection').style.display = 'block';
-          
-          // 버튼 클릭 시 해당 페이지로 이동
-          document.getElementById('populationPageBtn').addEventListener('click', function() {
-            window.location.href = "population.html";
-          });
-  
-          document.getElementById('populationPyramidPageBtn').addEventListener('click', function() {
-            window.location.href = "population_pyramid.html";
-          });
-  
-          return; // 선택 UI를 표시하고 종료
-        }
-  
-        // 나머지 조건들 처리
-        else if (searchQuery.includes("사망") || searchQuery.includes("출생")) {
-          targetPage = "population.html";  // 예: 사망인구, 출생인구 관련 페이지
-        } else if (searchQuery.includes("피라미드")) {
-          targetPage = "population_pyramid.html";  // 예: 인구 피라미드 관련 페이지
-        } else if (searchQuery.includes("지역")) {
-          targetPage = "regional_extinction.html";  // 예: 지역소멸 예측 관련 페이지
+    function popul() {
+      window.location.href = "population.html";  // 인구 예측 페이지로 이동
+    }
+
+    function popul_pyram() {
+      window.location.href = "population_pyramid.html";  // 인구 피라미드 페이지로 이동
+    }
+
+    function reg_ext() {
+      window.location.href = "regional_extinction.html";  // 지역소멸 예측 페이지로 이동
+    }
+
+    function goToMain() {
+      window.location.href = 'main.html';  // 메인 페이지로 이동
+    }
+
+    function selection() {
+      window.location.href = 'selection.html';
+    }
+
+    function searchNo() {
+      window.location.href = 'search_no.html';
+    }
+
+    function select(event) {
+        event.preventDefault();  // 폼 제출과 페이지 새로 고침을 막습니다.
+
+        // 입력 필드에서 값을 가져옵니다.
+        const searchQuery = document.querySelector('input[type="text"]').value.trim().toLowerCase();
+
+        // 검색어가 있을 경우
+        if (searchQuery !== "") {
+            // 검색어에 포함된 키워드에 따라 페이지 이동
+            if (searchQuery.includes("인구")) {
+                selection();
+            }
+            else if (searchQuery.includes("사망") || searchQuery.includes("출생")) {
+                popul();  // 사망인구, 출생인구 관련 페이지로 이동
+            } 
+            else if (searchQuery.includes("피라미드")) {
+                popul_pyram();  // 인구 피라미드 관련 페이지로 이동
+            } 
+            else if (searchQuery.includes("지역")) {
+                reg_ext();  // 지역소멸 예측 관련 페이지로 이동
+            } 
+            else {
+                searchNo();  // 관련된 키워드가 없으면 search_no로 이동
+            }
         } else {
-          window.location.href = "search_no.html";  // 입력된 검색어가 없는 경우
-          return;
+            alert("검색어를 입력해 주세요."); // 검색어가 없으면 경고 메시지 표시
         }
-  
-        // 직접 리다이렉션
-        window.location.href = targetPage;
-      } else {
-        alert("검색어를 입력해 주세요."); // 입력이 없으면 경고 메시지 표시
-      }
-    });
+    }
   </script>
 </head>
 <body>
   <!-- 헤더 -->
   <header>
     <nav>
-      <h1 class="logo">그 해 한국은</h1>
+      <h1 class="logo" onclick="goToMain()">그 해 한국은</h1>
       <div>
         <button class="lang"><i class="fa-solid fa-globe"></i>한국어<i class="fa-solid fa-caret-down"></i></button>
         <button>로그인</button>
@@ -68,7 +75,7 @@
       <h2>인구 예측 프로그램</h2>
       <h3>한국의 미래를 묻다</h3>
       <p>원하는 자료를 검색해보세요</p>
-      <form class="search">
+      <form class="search" onsubmit="select(event)">
         <input type="text" placeholder="통계 자료" required>
         <button type="submit">검색</button>
       </form>
