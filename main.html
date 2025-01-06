@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>인구 예측</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // 기본 폼 제출을 막습니다.
+    
+      // 입력 필드의 값을 가져옵니다.
+      const searchQuery = document.querySelector('input[type="text"]').value.trim().toLowerCase();
+    
+      // 입력값이 있을 때 처리
+      if (searchQuery !== "") {
+        let targetPage = "";
+    
+        // "인구"라는 검색어가 포함된 경우
+        if (searchQuery.includes("인구")) {
+          // 두 페이지 선택을 위한 UI 표시
+          document.getElementById('selection').style.display = 'block';
+          
+          // 버튼 클릭 시 해당 페이지로 이동
+          document.getElementById('populationPageBtn').addEventListener('click', function() {
+            window.location.href = "population.html";
+          });
+  
+          document.getElementById('populationPyramidPageBtn').addEventListener('click', function() {
+            window.location.href = "population_pyramid.html";
+          });
+  
+          return; // 선택 UI를 표시하고 종료
+        }
+  
+        // 나머지 조건들 처리
+        else if (searchQuery.includes("사망") || searchQuery.includes("출생")) {
+          targetPage = "population.html";  // 예: 사망인구, 출생인구 관련 페이지
+        } else if (searchQuery.includes("피라미드")) {
+          targetPage = "population_pyramid.html";  // 예: 인구 피라미드 관련 페이지
+        } else if (searchQuery.includes("지역")) {
+          targetPage = "regional_extinction.html";  // 예: 지역소멸 예측 관련 페이지
+        } else {
+          window.location.href = "search_no.html";  // 입력된 검색어가 없는 경우
+          return;
+        }
+  
+        // 직접 리다이렉션
+        window.location.href = targetPage;
+      } else {
+        alert("검색어를 입력해 주세요."); // 입력이 없으면 경고 메시지 표시
+      }
+    });
+  </script>
+</head>
+<body>
+  <!-- 헤더 -->
+  <header>
+    <nav>
+      <h1 class="logo">그 해 한국은</h1>
+      <div>
+        <button class="lang"><i class="fa-solid fa-globe"></i>한국어<i class="fa-solid fa-caret-down"></i></button>
+        <button>로그인</button>
+      </div>
+    </nav>
+    <div class="header-content">
+      <h2>인구 예측 프로그램</h2>
+      <h3>한국의 미래를 묻다</h3>
+      <p>원하는 자료를 검색해보세요</p>
+      <form class="search">
+        <input type="text" placeholder="통계 자료" required>
+        <button type="submit">검색</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- 배너 -->
+  <section id="banner">
+    <div class="banner-content">
+      <h3>아이 돌봄 정보 ai 서비스와 인구 예측 데이터를 제공해 드립니다</h3>
+      <p>ai 서비스와 예측 데이터 모두 받아보세요</p>
+      <button>자세히 알아보기</button>
+    </div>
+    <h2>예측 통계 알아보기</h2>
+    <select class="select-menu">
+      <option value="popul">사망인구 출생인구</option>
+      <option value="pyramid">인구 피라미드</option>
+      <option value="local">지역소멸 예측</option>
+    </select>
+  </section>
+
+  <!-- 멤버십 -->
+  <section id="membership">
+    <h2>회원이 되시면</h2>
+    <div class="membership-content">
+      <h3>돌봄 ai 회원 혜택</h3>
+      <p>아이 돌봄 정보 제공 ai를 1년간 매달 5000원으로 제공</p>
+      <p>기존 10000원 -> 5000원</p>
+    </div>
+  </section>  
+
+  <!-- 선택 가이드 -->
+  <section id="choice">
+    <h2>통계 자료 가이드</h2>
+    <div class="choice-content">
+      <div class="card">
+       <h3>사망인구, 출생인구</h3> 
+       <p>사망인구, 출생인구를
+        예측하는 인공지능 모델</p>   
+       <div class="bean-img">
+        <img src="images/graph.png" alt="">
+       </div>    
+      </div>
+      <div class="card">
+        <h3>인구 피라미드</h3> 
+        <p>미래의 대한민국 인구에 대한 데이터를 피라미드 모양으로 구현 + 노령화 지수</p>
+        <div class="bean-img">
+          <img src="images/graph.png" alt="">
+         </div>  
+      </div>
+      <div class="card">
+        <h3>지역소멸 예측</h3> 
+        <p>10년 단위로 인구수 및 지역소멸위험도 예측</p>
+        <div class="bean-img">
+          <img src="images/graph.png" alt="">
+         </div>  
+      </div>
+      <div class="card">
+        <h3>기타 자료</h3>     
+        <div class="bean-img">
+          <img src="images/graph.png" alt="">
+         </div>  
+      </div>
+    </div>
+  </section>  
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2>자주하는 질문과 답변</h2>
+    <ul class="accordion">
+      <li>
+        <input type="radio" name="accordion" id="first">
+        <label for="first">기획의도가 무엇인가요?</label>
+        <div class="content">          
+          <p>지속적으로 감소하는 출생아 수와 노인 인구 증가에 따른 문제를 알리기 위해서 이 프로젝트를 기획하게 되었습니다.</p>
+          <p>또한 자녀를 양육하는 사람들에게 돌봄 정보를 제공하기 위해 기획되었습니다.</p>
+        </div>
+      </li>
+      <li>
+        <input type="radio" name="accordion" id="second">
+        <label for="second">개발목표가 무엇인가요?</label>
+        <div class="content">
+          <p>1. 라쏘회귀를 사용하여 사망인구, 출생인구를 예측하는 인공지능 모델 구현</p>
+          <p>2. 연령별 사망률, 출생률 데이터를 이용하여 미래 대한민국 예상 인구를 피라미드 모양으로 구현</p>
+          <p>3. 사망률, 출산율 데이터에 이주 데이터를 추가하여 지역 인구수, 소멸 위험 예측</p>
+        </div>
+      </li>
+      <li>
+        <input type="radio" name="accordion" id="third">
+        <label for="third">업무분장은 어떻게 되나요?</label>
+        <div class="content">
+          <img src="images/work.jpg" alt="">
+        </div>
+      </li>
+      <li>
+        <input type="radio" name="accordion" id="fourth">
+        <label for="fourth">프로젝트 기대효과는 무엇인가요?</label>
+        <div class="content">
+          <p>사람들에게 저출산 고령화에 대한 심각성을 인식하도록 하고 ai 서비스가 자녀 양육하는 사람들에게 도움을 줄것입니다.</p>
+        </div>
+      </li>
+    </ul>
+    <div class="newsletter">
+      <p>이메일 주소를 보내시면 저희들의 자기소개서와 이력을 보내드립니다.</p>
+      <form class="add-email">
+        <input type="email" placeholder="이메일 주소" required>
+        <button type="submit">보내기</button>
+      </form>      
+    </div>
+  </section>  
+
+  <!-- 푸터 -->
+  <footer>
+    <div class="footer-content">
+      <div class="col left">
+        <ul class="footer-nav">
+          <li><a href="#">프로젝트 조 안내</a></li>
+          <li><a href="#">이용약관</a></li>
+          <li><a href="#">개인정보 취급방침</a></li>
+          <li><a href="#">이용안내</a></li>
+        </ul>
+        <div class="footer-info">
+          <p>프로젝트 조 : 4조 (조장 : 송봉환)</p>
+          <p>주소 : 서울 종로구 돈화문로 26 단성사 5층 KG아이티뱅크</p>
+          <p>조원 : 송봉환, 김윤준, 채수병</p>
+        </div>
+      </div>
+      <div class="col center">
+        <h2>고객센터</h2>
+        <h3>070-000-0000</h3>
+        <p>월-금 09:00-18:00</p>
+        <ul class="socials">
+          <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-square-facebook"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+        </ul>
+      </div>
+      <div class="col right">
+        <h2>커뮤니티</h2>
+        <p><a href="#">공지사항</a></p>
+        <p><a href="#">이벤트</a></p>
+        <p><a href="#">서비스 Q&A</a></p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>Copyright &copy; 생성형 ai 서비스 개발 4조 All rights reserved.</p>
+    </div>
+
+  </footer>  
+</body>
+</html>
