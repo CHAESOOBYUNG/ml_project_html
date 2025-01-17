@@ -1,0 +1,29 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  #map-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  #korea-map {
+    width: 100%;
+    display: block;
+  }
+  
+  .marker {
+    position: absolute;
+    background: rgba(255, 69, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+    transform: translate(-50%, -50%);
+  }
+  

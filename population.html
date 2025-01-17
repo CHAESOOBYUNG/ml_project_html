@@ -22,7 +22,17 @@
     <main>
         <div class="header-content">
             <h2>사망인구 출생인구</h2>
-            <h2>이미지 넣기</h2>
+            <div id="map" style="width:500px;height:400px;"></div>
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4038b39f76b0b0e30d94b92124d400ff"></script>
+            <script>
+                var container = document.getElementById('map');
+                var options = {
+                    center: new kakao.maps.LatLng(33.450701, 126.570667),
+                    level: 3
+                };
+
+                var map = new kakao.maps.Map(container, options);
+            </script>
             <!-- Button with onclick event that calls the goToMain() function -->
             <button onclick="goToMain()">메인으로</button>
         </div>
