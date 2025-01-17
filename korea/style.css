@@ -1,29 +1,51 @@
 /* styles.css */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+#map-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+#korea-map {
+  width: 100%;
+  display: block;
+}
+
+.marker {
+  position: absolute;
+  background: rgba(255, 69, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+/* 반응형 웹 스타일 */
+@media (max-width: 768px) {
   #map-container {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: auto;
+    max-width: 600px;
   }
-  
-  #korea-map {
-    width: 100%;
-    display: block;
-  }
-  
   .marker {
-    position: absolute;
-    background: rgba(255, 69, 0, 0.8);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-    text-align: center;
-    transform: translate(-50%, -50%);
+    font-size: 10px;
+    padding: 3px 8px;
   }
+}
+
+@media (max-width: 480px) {
+  #map-container {
+    max-width: 400px;
+  }
+  .marker {
+    font-size: 8px;
+    padding: 2px 6px;
+  }
+}
+
   
