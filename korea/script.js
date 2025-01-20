@@ -30,6 +30,9 @@ const regions = [
     marker.style.left = region.left;
     marker.innerHTML = `${region.name}<br>${region.value}`;
     mapContainer.appendChild(marker);
+    marker.style.backgroundColor = region.value > 25 ? "red" : "blue";
+    marker.setAttribute("data-info", "추가 정보: 예시 텍스트");
+
   });
   
   
