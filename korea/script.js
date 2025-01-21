@@ -1,38 +1,61 @@
 // script.js
 
-// 지역 데이터
-const regions = [
-    { name: "서울", value: 19.0, top: "19%", left: "24%" },
-    { name: "세종", value: 19.2, top: "38%", left: "28%" },
-    { name: "대전", value: 23.2, top: "43%", left: "31%" },
-    { name: "광주", value: 23.7, top: "63%", left: "22%" },
-    { name: "인천", value: 24.6, top: "21%", left: "16%" },
-    { name: "강원", value: 26.0, top: "15%", left: "47%" },
-    { name: "충북", value: 28.6, top: "35%", left: "36%" },
-    { name: "충남", value: 29.4, top: "40%", left: "20%" },
-    { name: "전북", value: 20.9, top: "55%", left: "26%" },
-    { name: "전남", value: 23.3, top: "69%", left: "24%" },
-    { name: "경북", value: 25.8, top: "42%", left: "60%" },
-    { name: "경남", value: 24.1, top: "60%", left: "48%" },
-    { name: "대구", value: 24.4, top: "50%", left: "53.5%" },
-    { name: "울산", value: 28.3, top: "57%", left: "66%" },
-    { name: "부산", value: 23.5, top: "64%", left: "64%" },
-    { name: "제주", value: 27.3, top: "94%", left: "16%" },
-    { name: "경기", value: 21.3, top: "25%", left: "30%" },
-  ];
-  
-  // 지도에 데이터 표시
-  const mapContainer = document.getElementById("map-container");
+// 통합된 JSON 데이터 로드 함수
+async function fetchRegionData() {
+  try {
+    const response = await fetch('korea/regions.json');
+    if (!response.ok) {
+      throw new Error('데이터를 가져오는 데 실패했습니다.');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('에러:', error.message);
+    return {};
+  }
+}
+
+// 기존 마커 삭제 함수
+function clearMarkers() {
+  const markers = document.querySelectorAll('.marker');
+  markers.forEach(marker => marker.remove());
+}
+
+// 마커 클릭 이벤트 처리
+function handleMarkerClick(region) {
+  alert(`지역: ${region.name}\n값: ${region.value}\n추가 정보: ${region.info || '정보 없음'}`);
+}
+
+// 마커 추가 함수
+function addMarkers(regions) {
+  const mapContainer = document.getElementById('map-container');
+  clearMarkers(); // 기존 마커 삭제
+
   regions.forEach(region => {
-    const marker = document.createElement("div");
-    marker.className = "marker";
+    const marker = document.createElement('div');
+    marker.className = 'marker';
     marker.style.top = region.top;
     marker.style.left = region.left;
     marker.innerHTML = `${region.name}<br>${region.value}`;
+    marker.setAttribute('data-info', region.info || '추가 정보 없음'); // 추가 정보 설정
     mapContainer.appendChild(marker);
-    marker.style.backgroundColor = region.value > 25 ? "red" : "blue";
-    marker.setAttribute("data-info", "추가 정보: 예시 텍스트");
 
+    marker.addEventListener('click', () => handleMarkerClick(region));
   });
-  
-  
+}
+
+// 초기화 함수
+async function initMap() {
+  const yearSelect = document.getElementById('year-select');
+  const data = await fetchRegionData(); // 전체 데이터 로드
+  const regions = data[yearSelect.value]; // 기본 연도 데이터 로드
+  addMarkers(regions);
+
+  // 연도 변경 이벤트 처리
+  yearSelect.addEventListener('change', () => {
+    const selectedRegions = data[yearSelect.value];
+    addMarkers(selectedRegions);
+  });
+}
+
+// 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', initMap);

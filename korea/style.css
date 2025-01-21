@@ -25,29 +25,30 @@ body {
   font-size: 12px;
   text-align: center;
   transform: translate(-50%, -50%);
-  z-index: 1; /* 기본 z-index 설정 */
+  z-index: 1;
   transition: z-index 0.2s, transform 0.2s;
 }
 
 .marker:hover {
-  z-index: 10; /* 마우스 오버 시 가장 위로 올림 */
-  transform: translate(-50%, -50%) scale(1.1); /* 약간 크기를 키워 강조 */
+  z-index: 10;
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
+/* 추가 정보 표시 */
 .marker:hover::after {
-  content: attr(data-info); /* data-info 속성 값을 표시 */
+  content: attr(data-info); /* data-info 속성값을 표시 */
   position: absolute;
   top: 50%;
-  left: 110%; /* 마커 오른쪽에 추가 정보 표시 */
+  left: 110%; /* 오른쪽에 표시 */
   transform: translateY(-50%);
   background: black;
   color: white;
   padding: 5px 10px;
   font-size: 10px;
   border-radius: 3px;
-  white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
-  z-index: 11; /* 추가 정보가 항상 위에 표시되도록 설정 */
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 11;
 }
 
 
@@ -64,15 +65,36 @@ body {
 }
 
 @media (max-width: 480px) {
-  #map-container {
-    max-width: 400px;
-  }
-  .marker {
-    font-size: 8px;
-    padding: 2px 6px;
+  .marker:hover::after {
+    left: 50%;
+    top: 110%;
+    transform: translateX(-50%);
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  .marker {
+    background: rgba(255, 255, 255, 0.8);
+    color: #000000;
+  }
+  .marker:hover::after {
+    background: #ffffff;
+    color: #000000;
+  }
+}
 
+#controls {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#year-select {
+  padding: 5px;
+  font-size: 16px;
+}
 
   
