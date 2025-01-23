@@ -6,6 +6,7 @@
     <title>Search</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="korea/style.css">
     <script>
         // JavaScript function to navigate to the main page
         function goToMain() {
@@ -22,9 +23,32 @@
     <main>
         <div class="header-content">
             <h2>인구 피라미드</h2>
-            <h2>이미지 넣기</h2>
+            <!-- 차트 선택 버튼 -->
+            <div class="chart-selector">
+                <label for="chart-type">차트 선택: </label>
+                <select id="chart-type">
+                    <option value="chart1">2025년</option>
+                    <option value="chart2">2035년</option>
+                    <option value="chart3">2045년</option>
+                    <option value="chart4">2055년</option>
+                    <option value="chart5">2065년</option>
+                    <option value="chart6">2075년</option>
+                </select>
+            </div>
+
+            <!-- 차트 표시 영역 -->
+            <div class="chart-container">
+                <canvas id="chart1"></canvas>
+                <canvas id="chart2"></canvas>
+                <canvas id="chart3"></canvas>
+                <canvas id="chart4"></canvas>
+                <canvas id="chart5"></canvas>
+                <canvas id="chart6"></canvas>
+            </div>
             <button onclick="goToMain()">메인으로</button>
         </div>
     </main>
+    <script src="korea/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
